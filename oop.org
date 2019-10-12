@@ -1,3 +1,0 @@
-* Object Oriented Programming
-https://scotch.io/bar-talk/s-o-l-i-d-the-first-five-principles-of-object-oriented-design
-https://en.wikipedia.org/wiki/Object-oriented_programming#SOLID_and_GRASP_guidelines
