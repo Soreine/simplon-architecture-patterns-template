@@ -6,9 +6,6 @@
   - [Presentation](https://slides.com/nicolasgaborit/design-principles/fullscreen)
 - Programmation Fonctionnelle
   - [Presentation](https://slides.com/nicolasgaborit/functional-programming/fullscreen)
-
-## Mercredi
-
 - Principes SOLID
   - [Presentation](https://slides.com/nicolasgaborit/solid/fullscreen)
 - UML
@@ -16,7 +13,7 @@
 - Design Patterns
   - [Introduction](https://slides.com/nicolasgaborit/design-patterns-intro/fullscreen)
   - [Catalogue](https://slides.com/nicolasgaborit/design-patterns-catalogue/fullscreen)
-  - [Prototype](./Design-Patterns/Prototype-exo.md)
+  - [Prototype](./Design-Patterns/Prototype/Prototype-exo.md)
   - [Singleton]
   - [Adapter]
   - [Composite]
