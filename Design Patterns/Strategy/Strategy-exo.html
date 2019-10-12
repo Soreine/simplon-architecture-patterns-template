@@ -1,0 +1,73 @@
+<!-- Voir les instructions dans Strategy-exo.js -->
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+  </head>
+  <body>
+    <div class="container">
+      <canvas id="canvas" width="400" height="400"></canvas>
+      <buttons>
+        <button id="Circle">Circle</button>
+        <button id="Square">Square</button>
+      </buttons>
+      <buttons class="colors">
+        <button id="Magenta">Magenta</button>
+        <button id="Cyan">Cyan</button>
+        <button id="Yellow">Yellow</button>
+        <button id="Black">Black</button>
+      </buttons>
+      <buttons>
+        <button id="Size4">4px</button>
+        <button id="Size16">16px</button>
+        <button id="Size64">64px</button>
+      </buttons>
+    </div>
+
+    <script src="./Strategy-exo.js"></script>
+  </body>
+  <style>
+    .container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+
+    canvas {
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      border: 1px solid black;
+    }
+
+    buttons {
+      display: flex;
+      justify-content: center;
+    }
+
+    button {
+      margin: 10px 5px;
+    }
+
+    .colors button {
+      font-weight: bold;
+    }
+
+    #Magenta {
+      background: rgba(255, 0, 255);
+    }
+    #Cyan {
+      background: rgba(0, 255, 255);
+    }
+    #Yellow {
+      background: rgba(255, 255, 0);
+    }
+    #Black {
+      color: white;
+      background: rgba(0, 0, 0);
+    }
+  </style>
+</html>

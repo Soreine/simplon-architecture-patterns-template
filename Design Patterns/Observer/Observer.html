@@ -1,0 +1,162 @@
+<!-- Voir les instructions dans Observer-exo.js -->
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+  </head>
+
+  <body>
+    <div class="container">
+      <div class="header">
+        <h1>Macarons ronds ronds</h1>
+      </div>
+      <div id="money-counter" class="counter">0</div>
+      <button id="macaron" title="Macaron" class="image-button"></button>
+
+      <div id="clicker" class="button-container">
+        <div class="price">0</div>
+        <button title="Cliqueur" class="image-button"></button>
+        <div class="counter">0</div>
+      </div>
+
+      <div id="grandma" class="button-container">
+        <div class="price">0</div>
+
+        <button title="Mamie" class="image-button"></button>
+        <div class="counter">0</div>
+      </div>
+
+      <div id="bakery" class="button-container">
+        <div class="price">0</div>
+
+        <button title="Boulangerie" class="image-button"></button>
+        <div class="counter">0</div>
+      </div>
+      <div id="factory" class="button-container">
+        <div class="price">0</div>
+        <button title="Usine" class="image-button"></button>
+        <div class="counter">0</div>
+      </div>
+    </div>
+
+    <script src="./Observer-solution.js"></script>
+  </body>
+
+  <style>
+    .container {
+      font-family: serif;
+      position: relative;
+      margin: auto;
+      padding: 0px;
+      width: 100%;
+      max-width: 800px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .header {
+      padding: 20px;
+      text-align: center;
+      color: #910060;
+    }
+
+    #macaron {
+      align-self: center;
+      height: 180px;
+      width: 180px;
+      background-image: url("https://pngimg.com/uploads/macaron/macaron_PNG114.png");
+    }
+
+    #money-counter {
+      text-align: center;
+      font-size: 40pt;
+    }
+    #money-counter:after {
+      font-size: 50%;
+      content: "€";
+    }
+
+    .counter {
+      font-family: monospace;
+      color: #910060;
+      font-size: 24pt;
+      margin: 20px 10px;
+      min-width: 4em;
+    }
+
+    .price {
+      font-family: monospace;
+      text-align: right;
+      width: 5em;
+      color: #910060;
+      font-size: 18pt;
+      margin: 10px 10px;
+    }
+    .price:after {
+      font-size: 80%;
+      content: "€";
+    }
+
+    .button-container {
+      display: flex;
+      align-items: center;
+    }
+
+    #clicker .image-button {
+      background-image: url("https://icon-library.net/images/mouse-pointer-hand-icon/mouse-pointer-hand-icon-4.jpg");
+    }
+
+    #grandma .image-button {
+      background-image: url("https://cdn4.iconfinder.com/data/icons/avatars-xmas-giveaway/128/grandma_elderly_nanny_avatar-512.png");
+    }
+
+    #bakery .image-button {
+      background-image: url("https://cdn.pixabay.com/photo/2018/07/11/23/44/shop-3532260_960_720.png");
+    }
+
+    #factory .image-button {
+      background-image: url("https://images.vexels.com/media/users/3/149880/isolated/preview/02220a1adb003240f333affbc92c825d-industrial-factory-illustration-by-vexels.png");
+    }
+
+    .image-button {
+      height: 76px;
+      width: 76px;
+      transition: all 0.1s;
+      margin: 10px;
+      padding: 0px;
+      cursor: pointer;
+      border: none;
+      outline: none;
+
+      background-size: contain;
+      background-repeat: no-repeat;
+      background-position: center;
+      background-color: transparent;
+    }
+
+    .image-button:focus {
+      border: none;
+      outline: none;
+    }
+
+    button::-moz-focus-inner {
+      border: 0;
+    }
+
+    .image-button:active {
+      transform: scale(1.1);
+    }
+
+    .image-button:disabled {
+      opacity: 0.4;
+      cursor: default;
+    }
+
+    .image-button:disabled:active {
+      transform: scale(1);
+    }
+  </style>
+</html>
