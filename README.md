@@ -14,11 +14,11 @@
   - [Introduction](https://slides.com/nicolasgaborit/design-patterns-intro/fullscreen)
   - [Catalogue](https://slides.com/nicolasgaborit/design-patterns-catalogue/fullscreen)
   - [Prototype](./Design-Patterns/Prototype/)
-  - [Singleton]
-  - [Adapter]
-  - [Composite]
-  - Façade
-  - [Strategy]
-  - [Chain of Responsibility]
-  - [Observer]
-  - [Proxy et Decorator]
+  - [Singleton](./Design-Patterns/Singleton/)
+  - [Adapter](./Design-Patterns/Adapter/)
+  - [Composite](./Design-Patterns/Composite/)
+  - Facade
+  - [Strategy](./Design-Patterns/Strategy/)
+  - [Chain of Responsibility](./Design-Patterns/Chain-of-Responsibility/)
+  - [Observer](./Design-Patterns/Observer/)
+  - [Proxy et Decorator](./Design-Patterns/Proxy/)
