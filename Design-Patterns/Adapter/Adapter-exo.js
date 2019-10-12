@@ -1,11 +1,5 @@
 /* eslint-disable class-methods-use-this */
 
-/* 
-Instructions:
-
-The AdaptedOldCalculator class should expose the same interface than OldCalculator, but use the new code and interface NewCalculator internally
- */
-
 // Old code
 class OldCalculator {
   operate(term1, term2, operation) {
