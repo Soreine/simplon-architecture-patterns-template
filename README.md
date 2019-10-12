@@ -16,7 +16,7 @@
 - Design Patterns
   - [Introduction](https://slides.com/nicolasgaborit/design-patterns-intro/fullscreen)
   - [Catalogue](https://slides.com/nicolasgaborit/design-patterns-catalogue/fullscreen)
-  - [Prototype](./Design%20Patterns/Prototype-exo.md)
+  - [Prototype](./Design-Patterns/Prototype-exo.md)
   - [Singleton]
   - [Adapter]
   - [Composite]
