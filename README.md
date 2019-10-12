@@ -21,4 +21,4 @@
   - [Strategy](./Design-Patterns/Strategy/)
   - [Chain of Responsibility](./Design-Patterns/Chain-of-Responsibility/)
   - [Observer](./Design-Patterns/Observer/)
-  - [Proxy et Decorator](./Design-Patterns/Proxy/)
+  - [Proxy et Decorator](./Design-Patterns/Proxy-Decorator/)
