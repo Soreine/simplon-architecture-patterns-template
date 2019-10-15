@@ -1,3 +1,10 @@
+/*
+Instructions
+
+1. Compléter le code de `initializeCalendar` pour obtenir les bon log final
+2. Implémenter une méthode `CalendarEvent.clone` pour qu'il soit un Prototype. S'en servir dans le code de `initializeCalendar`. Implémenter optionnellement des methodes de modifications telle que `addParticipant`.
+*/
+
 class CalendarEvent {
   // name: string
   // date: { day: number, month: number }
@@ -21,46 +28,23 @@ class CalendarEvent {
   }
 
   // Returns a deep clone of this event
-  clone() {
-    return new CalendarEvent(
-      this.name,
-      { ...this.date },
-      [].concat(this.participants)
-    );
-  }
+  // clone() {}
 
   // Return a clone of this event with a participant added
   // addParticipant(name) {}
 }
 
-// const event1 = new CalendarEvent(
-//   "Gardening preparation",
-//   { day: 1, month: 3 },
-//   ["Steve", "Hilary"]
-// );
-
-// const event2 = event1.clone();
-// event2.name = "Work";
-// event2.participants.push("Samantha");
-// event1.name == "Gardening preparation"
-
 // Creates an array of initial Events
 function initializeCalendar() {
-  const event1 = new CalendarEvent(
-    "Gardening preparation",
-    { day: 1, month: 3 },
-    ["Steve", "Hilary"]
-  );
-  const event2 = new CalendarEvent("Gardening work", { day: 1, month: 3 }, [
+  const event1 = new CalendarEvent("Gardening", { day: 1, month: 3 }, [
     "Steve",
-    "Hilary",
-    "Samantha"
+    "Hilary"
   ]);
-  const event3 = new CalendarEvent("Gardening work", { day: 2, month: 3 }, [
-    "Steve",
-    "Hilary",
-    "Samantha"
-  ]);
+
+  // const event2 = ...
+
+  // const event3 = ...
+
   return [event1, event2, event3];
 }
 
