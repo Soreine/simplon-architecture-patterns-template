@@ -21,7 +21,13 @@ class CalendarEvent {
   }
 
   // Returns a deep clone of this event
-  // clone() {
+  clone() {
+    return new CalendarEvent(
+      this.name,
+      { ...this.date },
+      [].concat(this.participants)
+    );
+  }
 
   // Return a clone of this event with a participant added
   // addParticipant(name) {}
