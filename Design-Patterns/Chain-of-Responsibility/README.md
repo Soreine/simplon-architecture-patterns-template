@@ -29,6 +29,35 @@ Afficher un message d'erreur correspondant en cas de formulaire invalide. Pour c
 
 Séparer chaque règle en une fonction particulière. Les grouper en une liste de règle, et implémenter une fonction qui, au submit, va appliquer chaque règle de la liste, en s'arrêtant et en affichant la première erreur rencontrée.
 
+```js
+const oldPasswordIsCorrect = ({
+  oldPassword,
+  newPassword,
+  confirmNewPassword
+}) => {
+  if (oldPassword !== "god69") {
+    return "Old password is incorrect";
+  } else {
+    return null;
+  }
+};
+
+const RULES = [oldPasswordIsCorrect, rule2, rule3];
+
+function checkForm({ oldPassword, newPassword, confirmNewPassword }) {
+  // Use reduce ?
+  for (let i = 0; i < RULES.length; i++) {
+    const rule = RULES[i];
+    const error = rule({ oldPassword, newPassword, confirmNewPassword });
+    if (error) {
+      return error;
+    }
+  }
+
+  return null;
+}
+```
+
 ## 3.
 
 (Bonus) Écrire la même chose en faisant des classes `Rule` qui sont des Handler, et qui s'occupent elles-même d'appeler la règle suivante si il n'y a pas d'erreur.
