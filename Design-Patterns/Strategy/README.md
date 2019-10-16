@@ -49,3 +49,17 @@ L'un dessine des cercles, l'autre des carrés.
 ## 5.
 
 Remplacer la méthode `setShape` par une méthode `setPencil`, et faire en sorte que `draw` utilise la stratégie du pencil courant pour dessiner. La logique du dessin est déléguée à l'objet pencil.
+
+```js
+const circlePencil = new CirclePencil();
+const squarePencil = new SquarePencil();
+
+bindButton("Circle", () => {
+  drawingArea.setPencil(circlePencil);
+});
+```
+
+## 6. (Bonus)
+
+Modifier `Strategy-lib.js` pour que l'on puisse dessiner de maniere continue en cliquant-glissant, et non clic par clic.
+Utiliser pour cela les evenement `mousedown`, `mouseup`, `mouseleave`, au lieu de `click`
