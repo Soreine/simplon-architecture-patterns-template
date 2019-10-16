@@ -1,5 +1,7 @@
 # Instructions
 
+But: Representer une scene par un aggregat d'objet composite. Et pouvoir dessiner cette scene, ou une partie de cette scene (.draw()).
+
 ## 1.
 
 Écrire une classe Square et Circle. Elles doivent remplir l'interface commune à tous les élément d'une scène:
@@ -15,7 +17,9 @@ Utiliser les pour dessiner une scène
 
 ## 2.
 
-Écrire une classe Group, qui peut contenir une liste de SceneObject. Group est lui meme un SceneObject. La méthode `Group.draw(x, y)` dessinera tous les objets du groupe.
+Écrire une classe Group, qui peut contenir une liste de SceneObject. Group est lui meme un SceneObject. La méthode `group.draw(x, y)` dessinera tous les objets du groupe.
+
+Group contiendra des children.
 
 Grouper tous les objets de votre scène en un seul Group, et n'appeler `.draw` que sur ce groupe.
 

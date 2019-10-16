@@ -70,6 +70,11 @@ class Circle {
   }
 }
 
+class Group {
+  constructor() {}
+  draw(x, y) {}
+}
+
 // This is where the code for drawing the scene goes
 function drawScene(
   // Here are the coordinates where the user clicked
@@ -82,10 +87,8 @@ function drawScene(
   const square = new Square(50, BLUE);
   const circle = new Circle(25, RED);
 
-  square.draw(x, y);
-  square.draw(x - 50, y + 50);
-  circle.draw(x + 50, y + 50);
-  circle.draw(x + 50, y);
+  const group = new Group([square, circle]);
+  group.draw(x, y);
 }
 
 window.onload = init;
