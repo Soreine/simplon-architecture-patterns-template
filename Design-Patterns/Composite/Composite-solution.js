@@ -71,8 +71,15 @@ class Circle {
 }
 
 class Group {
-  constructor() {}
-  draw(x, y) {}
+  constructor(sceneObjects) {
+    this.children = sceneObjects;
+  }
+
+  // Dessiner le groupe (ses enfants)
+  draw(x, y) {
+    // Dessiner chaque enfant
+    this.children.forEach(child => child.draw(x, y));
+  }
 }
 
 // This is where the code for drawing the scene goes
@@ -87,8 +94,10 @@ function drawScene(
   const square = new Square(50, BLUE);
   const circle = new Circle(25, RED);
 
-  const group = new Group([square, circle]);
-  group.draw(x, y);
+  const group1 = new Group([square, circle]);
+  group1.draw(x, y);
+
+  // new Group([new Square(...), group1])
 }
 
 window.onload = init;
