@@ -19,8 +19,10 @@ Créer une `CountryDB` qui implémente les fonctions suivantes:
 En utilisant...
 
 ```
-  countryNamesUrl = 'http://country.io/names.json'
-  countryCapitalsUrl = 'http://country.io/capital.json'
+ const countryNamesUrl =
+    "https://gist.githubusercontent.com/Soreine/94eb87434049e6185d9953252e9359ff/raw/e2e4eccd4c819cd43535840d6dc3147bb584629a/names.json";
+  const countryCapitalsUrl =
+    "https://gist.githubusercontent.com/Soreine/94eb87434049e6185d9953252e9359ff/raw/e2e4eccd4c819cd43535840d6dc3147bb584629a/capital.json";
 ```
 
 ... tester le module en affichant dans l'UI les deux JSON de manière brute.
