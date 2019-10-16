@@ -1,11 +1,17 @@
 # Instructions
 
+Le but est de faire un mini-Paint, un outil de dessin.
+Le programme aura un état qui indique quelle forme de crayon est sélectionnée,
+quelle taille de crayon, et quelle couleur est utilisée.
+La taille du crayon et la couleur seront des valeurs simples et classiques.
+En revanche, la forme du crayon (un objet `Pencil`) encapsulera toute la logique pour dessiner sur la zone avec la forme souhaitée.
+
 ## 1.
 
 Écrire une classe DrawingArea
 
 ```ts
-interface DrawingArea {
+class DrawingArea {
   // Draw a circle at the given coordinate
   // using the current size and color
   draw(x, y);

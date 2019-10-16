@@ -42,7 +42,7 @@ class Rule {
     constructor()
 
     // Handler.setNext
-    setNext()
+    setNext(rule)
 
     // (this is the equivalent of Handler.handle)
     check(form)
