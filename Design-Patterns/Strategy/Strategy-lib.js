@@ -31,6 +31,40 @@ function drawCircle(x, y, radius, color) {
   ctx.fill();
 }
 
+function drawStar(cx, cy, size, color) {
+  const spikes = 5;
+  const outerRadius = size;
+  const innerRadius = outerRadius / 2;
+  let rot = (Math.PI / 2) * 3;
+  let x = cx;
+  let y = cy;
+  const step = Math.PI / spikes;
+
+  ctx.beginPath();
+  ctx.moveTo(cx, cy - outerRadius);
+
+  for (let i = 0; i < spikes; i += 1) {
+    x = cx + Math.cos(rot) * outerRadius;
+    y = cy + Math.sin(rot) * outerRadius;
+    ctx.lineTo(x, y);
+    rot += step;
+
+    x = cx + Math.cos(rot) * innerRadius;
+    y = cy + Math.sin(rot) * innerRadius;
+    ctx.lineTo(x, y);
+    rot += step;
+  }
+  ctx.lineTo(cx, cy - outerRadius);
+  ctx.closePath();
+  ctx.lineWidth = 5;
+  ctx.strokeStyle = color;
+  ctx.stroke();
+  ctx.fillStyle = color;
+  ctx.fill();
+
+  console.log("draw Star");
+}
+
 function prepareCanvas() {
   if (!canvas) {
     initializeCanvas();
@@ -47,11 +81,44 @@ function onClick(callback) {
   });
 }
 
+function onDraw(callback) {
+  let drawing = false;
+
+  function findXY(event) {
+    const offset = canvas.getBoundingClientRect();
+    const x = event.clientX - offset.x;
+    const y = event.clientY - offset.y;
+    return [x, y];
+  }
+  canvas.addEventListener("mousedown", event => {
+    drawing = true;
+    const [x, y] = findXY(event);
+    callback(x, y);
+  });
+
+  canvas.addEventListener("mousemove", event => {
+    if (drawing) {
+      const [x, y] = findXY(event);
+      callback(x, y);
+    }
+  });
+
+  canvas.addEventListener("mouseup", () => {
+    drawing = false;
+  });
+
+  canvas.addEventListener("mouseleave", () => {
+    drawing = false;
+  });
+}
+
 export {
   prepareCanvas,
   drawCircle,
   drawSquare,
+  drawStar,
   onClick,
+  onDraw,
   MAGENTA,
   YELLOW,
   CYAN,

@@ -62,4 +62,4 @@ bindButton("Circle", () => {
 ## 6. (Bonus)
 
 Modifier `Strategy-lib.js` pour que l'on puisse dessiner de maniere continue en cliquant-glissant, et non clic par clic.
-Utiliser pour cela les evenement `mousedown`, `mouseup`, `mouseleave`, au lieu de `click`
+Utiliser pour cela les evenement `mousedown`, `mouseup`, `mouseleave`, `mousemove`, au lieu de `click` dans `onClick`.
