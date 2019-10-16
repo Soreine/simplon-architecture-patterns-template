@@ -29,37 +29,30 @@ Afficher un message d'erreur correspondant en cas de formulaire invalide. Pour c
 
 Séparer chaque règle en une fonction particulière. Les grouper en une liste de règle, et implémenter une fonction qui, au submit, va appliquer chaque règle de la liste, en s'arrêtant et en affichant la première erreur rencontrée.
 
+## 3.
+
+Nous allons écrire la même chose en faisant des classes `Rule` qui sont des Handler, et qui s'occupent elles-même d'appeler la règle suivante si il n'y a pas d'erreur.
+
+## 3.1
+
+Écrire une classe Rule :
+
 ```js
-const oldPasswordIsCorrect = ({
-  oldPassword,
-  newPassword,
-  confirmNewPassword
-}) => {
-  if (oldPassword !== "god69") {
-    return "Old password is incorrect";
-  } else {
-    return null;
-  }
-};
+class Rule {
+    constructor()
 
-const RULES = [oldPasswordIsCorrect, rule2, rule3];
+    // Handler.setNext
+    setNext()
 
-function checkForm({ oldPassword, newPassword, confirmNewPassword }) {
-  // Use reduce ?
-  for (let i = 0; i < RULES.length; i++) {
-    const rule = RULES[i];
-    const error = rule({ oldPassword, newPassword, confirmNewPassword });
-    if (error) {
-      return error;
-    }
-  }
-
-  return null;
+    // (this is the equivalent of Handler.handle)
+    check(form)
 }
 ```
 
-## 3.
+## 3.2
 
-(Bonus) Écrire la même chose en faisant des classes `Rule` qui sont des Handler, et qui s'occupent elles-même d'appeler la règle suivante si il n'y a pas d'erreur.
+Réecrire les regles, et adapter `checkForm`
+
+## 3.3
 
 Quelle version préférez-vous et pourquoi ?
