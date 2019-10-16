@@ -2,7 +2,19 @@
 
 ## 1.
 
-Implémenter la vérifications des données saisies dans l'ordre:
+Implémenter la vérifications des données saisies, dans l'ordre, sous la forme d'une fonction `checkForm`.
+
+```js
+
+function checkForm({ oldPassword, newPassword, confirmPassword }) {
+    // Checks every condition, and return an appropriate error message (string)
+    // if one fails
+    ...
+    // else return null
+}
+```
+
+Voici les vérifications à implémenter:
 
 - L'ancien password doit être correct (disons que c'était "god69")
 - Le nouveau password n'est pas vide
@@ -11,7 +23,7 @@ Implémenter la vérifications des données saisies dans l'ordre:
 - Le nouveau password a au moins 8 caractères
 - Le nouveau password contient au moins un chiffre
 
-Afficher un message d'erreur correspondant en cas de formulaire invalide.
+Afficher un message d'erreur correspondant en cas de formulaire invalide. Pour cela, dans `submitNewPassword`, utiliser la fonction `checkForm`, et si `checkForm` renvoie un message, l'afficher comme message d'erreur avec `displayError()`, sinon faire un `console.log('Submitted form')` pour simuler l'envoi du formulaire.
 
 ## 2.
 
