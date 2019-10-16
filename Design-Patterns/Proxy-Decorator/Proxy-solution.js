@@ -16,10 +16,25 @@ class CountryDB {
   fetchCountryCapitals() {
     return fetch(this.countryCapitalsUrl).then(res => res.json());
   }
+
+  async findCountryCapital(countryName) {
+    const countryNamesJson = await this.fetchCountryNames();
+    const countryCapitalsJson = await this.fetchCountryCapitals();
+
+    const code = Object.keys(countryNamesJson).find(
+      key => countryNamesJson[key] === countryName
+    );
+
+    if (!code) {
+      return null;
+    }
+
+    return countryCapitalsJson[code];
+  }
 }
 
 const countryDB = new CountryDB(NAMES_URL, CAPITALS_URL);
-countryDB.fetchCountryCapitals().then(capitals => {
-  const text = JSON.stringify(capitals, null, 2);
+countryDB.findCountryCapital("Uruguay").then(capital => {
+  const text = JSON.stringify(capital, null, 2);
   document.body.innerText = text;
 });
