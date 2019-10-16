@@ -41,3 +41,12 @@ Pour les exercices dans le dossier Design Patterns, ils utilisent la syntaxe ES6
 
 - Les exercices avec seulement un fichier `.js` peuvent se faire avec Node + Babel. Executez le code en faisant `./node_modules/.bin/babel-node {chemin/vers/le/fichier.js}`
 - Les exercices avec un fichier `.html` peuvent être fait en utilisant Parcel. Démarrer le serveur de developpement en faisant `./node_modules/.bin/parcel {chemin/vers/le/fichier.html}` et en ouvrant http://localhost:1234/
+
+## Pour aller plus loin
+
+À la fin de chaque exercice, si il vous reste du temps:
+
+- Dessiner le diagramme UML de l'implémentation d'un exercice (quand il y a des classes)
+- Pour chaque exercice, juger la séparation des responsabilités, le couplage des composants, la lisibilité des parties coeurs du programme.
+- Comparer sa solution avec celles des autres. Discuter des avantages/inconvénients de chaque solution.
+- Pour chaque solution réalisée, en faire l'équivalent en fonctionnel. Essayer donc de limiter au maximum l'utilisation de classes. Ne pas hésiter à demander des conseils et direction.
