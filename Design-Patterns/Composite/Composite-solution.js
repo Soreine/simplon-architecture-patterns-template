@@ -82,6 +82,19 @@ class Group {
   }
 }
 
+class Offset {
+  constructor(offsetX, offsetY, sceneObject) {
+    this.child = sceneObject;
+    this.offsetX = offsetX;
+    this.offsetY = offsetY;
+  }
+
+  // Dessine son enfant en x + offsetX, y + offsetY
+  draw(x, y) {
+    this.child.draw(x + this.offsetX, y + this.offsetY);
+  }
+}
+
 // This is where the code for drawing the scene goes
 function drawScene(
   // Here are the coordinates where the user clicked
@@ -91,13 +104,16 @@ function drawScene(
   // Prepare the canvas for drawing
   prepareCanvas();
 
-  const square = new Square(50, BLUE);
-  const circle = new Circle(25, RED);
+  const ear = new Circle(12.5, GRAY);
+  const ears = new Group([
+    new Offset(-25, -15, ear),
+    new Offset(+25, -15, ear)
+  ]);
+  const head = new Circle(25, GRAY);
+  const body = new Offset(-30, 30, new Square(60, RED));
+  const TheDude = new Group([ears, head, body]);
 
-  const group1 = new Group([square, circle]);
-  group1.draw(x, y);
-
-  // new Group([new Square(...), group1])
+  TheDude.draw(x, y);
 }
 
 window.onload = init;
