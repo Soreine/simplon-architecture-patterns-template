@@ -6,6 +6,10 @@ function submitNewPassword({ oldPassword, newPassword, confirmNewPassword }) {
   displayError("Not implemented");
 }
 
+// -------------
+// Below is utility code for the exercise
+// --------------
+
 /**
  * Display an error message below the form
  * @param {string} msg
