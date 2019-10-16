@@ -15,6 +15,7 @@ module.exports = {
   rules: {
     "no-console": 0,
     "max-classes-per-file": 0,
-    "no-use-before-define": 0
+    "no-use-before-define": 0,
+    "class-methods-use-this": 0
   }
 };

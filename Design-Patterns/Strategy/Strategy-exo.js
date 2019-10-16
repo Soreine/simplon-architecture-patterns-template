@@ -40,7 +40,28 @@ import {
 } from "./Strategy-lib";
 
 class DrawingArea {
-  // TODO
+  constructor(size = 4, color = MAGENTA) {
+    this.size = size;
+    this.color = color;
+  }
+
+  // shape = 'circle' | 'square'
+  setShape(shape) {}
+
+  setSize(size) {
+    this.size = size;
+  }
+
+  setColor(color) {
+    this.color = color;
+  }
+
+  // Draw a circle at the given coordinate
+  // using the current size and color
+  draw(x, y) {
+    // if (circle) ?
+    drawCircle(x, y, this.size, this.color);
+  }
 }
 
 // This is called when the page is loaded.
@@ -48,7 +69,40 @@ function init() {
   // Prepare the canvas for drawing
   prepareCanvas();
 
-  // TODO
+  const drawingArea = new DrawingArea();
+
+  [
+    ["Magenta", MAGENTA],
+    ["Cyan", CYAN],
+    ["Yellow", YELLOW],
+    ["Black", BLACK]
+  ].forEach(([id, color]) => {
+    bindColorButton(id, color, drawingArea);
+  });
+  [["Size4", 4], ["Size16", 16], ["Size64", 64]].forEach(([id, size]) => {
+    bindSizeButton(id, size, drawingArea);
+  });
+
+  onClick((x, y) => {
+    drawingArea.draw(x, y);
+  });
+}
+
+function bindButton(id, callback) {
+  const button = document.getElementById(id);
+  button.addEventListener("click", callback);
+}
+
+function bindColorButton(id, color, drawingArea) {
+  bindButton(id, () => {
+    drawingArea.setColor(color);
+  });
+}
+
+function bindSizeButton(id, size, drawingArea) {
+  bindButton(id, () => {
+    drawingArea.setSize(size);
+  });
 }
 
 window.onload = init;
