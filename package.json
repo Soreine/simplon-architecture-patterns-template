@@ -20,6 +20,7 @@
     "prettier": "^1.18.2"
   },
   "scripts": {
+    "Strategy": "npm run parcel ./Design-Patterns/Strategy/Strategy-exo.html",
     "CoR": "npm run parcel ./Design-Patterns/Chain-of-Responsibility/Chain-of-Responsibility-exo.html",
     "parcel": "./node_modules/.bin/parcel"
   }
