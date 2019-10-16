@@ -16,13 +16,29 @@ Créer une `CountryDB` qui implémente les fonctions suivantes:
 
 - `fetchCountryCapitals()` : renvoie une Promise contenant le JSON présent à `countryCapitalsUrl`
 
+Utilisez `const promise = fetch(url)`
+Pour recuperer le JSON dans la Response de fetch,
+
+```js
+const res = await fetch(url);
+const json = await res.json();
+```
+
+Pour stringify un JSON:
+
+```js
+JSON.stringify(json, null, 2);
+```
+
 En utilisant...
 
 ```
- const countryNamesUrl =
-    "https://gist.githubusercontent.com/Soreine/94eb87434049e6185d9953252e9359ff/raw/e2e4eccd4c819cd43535840d6dc3147bb584629a/names.json";
-  const countryCapitalsUrl =
-    "https://gist.githubusercontent.com/Soreine/94eb87434049e6185d9953252e9359ff/raw/e2e4eccd4c819cd43535840d6dc3147bb584629a/capital.json";
+
+const countryNamesUrl =
+"https://gist.githubusercontent.com/Soreine/94eb87434049e6185d9953252e9359ff/raw/e2e4eccd4c819cd43535840d6dc3147bb584629a/names.json";
+const countryCapitalsUrl =
+"https://gist.githubusercontent.com/Soreine/94eb87434049e6185d9953252e9359ff/raw/e2e4eccd4c819cd43535840d6dc3147bb584629a/capital.json";
+
 ```
 
 ... tester le module en affichant dans l'UI les deux JSON de manière brute.
@@ -55,3 +71,7 @@ Vérifier que chaque appel est effectivement loggué.
 
 Créer un Proxy autour du module `CountryDB`, par composition, qui va garder un cache des résultats de `findCountryCapital`, pour économiser les requêtes.
 Vérifier que des appels à `findCountryCapital` sont effectivement économisés.
+
+```
+
+```
