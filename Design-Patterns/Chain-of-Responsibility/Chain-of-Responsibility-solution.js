@@ -3,11 +3,14 @@
  */
 function submitNewPassword({ oldPassword, newPassword, confirmNewPassword }) {
   // Verifie le formulaire
-  const maybeError = checkForm({
-    oldPassword,
-    newPassword,
-    confirmNewPassword
-  });
+  const maybeError = checkForm(
+    {
+      oldPassword,
+      newPassword,
+      confirmNewPassword
+    },
+    RULES
+  );
   // Si pas OK, affiche un message d'erreur
   if (typeof maybeError === "string") {
     displayError(maybeError);
@@ -18,34 +21,61 @@ function submitNewPassword({ oldPassword, newPassword, confirmNewPassword }) {
   }
 }
 
-function checkForm({ oldPassword, newPassword, confirmNewPassword }) {
-  //  - L'ancien password doit être correct (disons que c'était "god69")
-  if (oldPassword !== "god69") {
-    return "Old password is incorrect";
-  }
-  // - Le nouveau password n'est pas vide
-  if (newPassword === "") {
-    return "New password is empty";
-  }
-  // - Le nouveau password est différent de l'ancien
-  if (newPassword === oldPassword) {
-    return "New password should not be identical to old password";
-  }
-  // - Le nouveau password et la confirmation sont identiques
-  if (newPassword !== confirmNewPassword) {
-    return "Please confirm password";
-  }
-  // - Le nouveau password a au moins 8 caractères
-  if (newPassword.length < 8) {
-    return "New password is too short";
-  }
-  // - Le nouveau password contient au moins un chiffre
-  const hasDigits = /\d/;
-  if (!hasDigits.test(newPassword)) {
-    return "New password should have digits";
-  }
+function createRule(isValid, errorMsg) {
+  const rule = form => {
+    if (!isValid(form)) {
+      return errorMsg;
+    }
+    return null;
+  };
 
-  return null;
+  return rule;
+}
+
+const oldPasswordCorrect = createRule(
+  ({ oldPassword }) => oldPassword === "god69",
+  "Old password is incorrect"
+);
+
+const newPasswordIsNotOldPassword = createRule(
+  ({ oldPassword, newPassword }) => oldPassword !== newPassword,
+  "New password should be different than the old one"
+);
+
+const newPasswordNotEmpty = createRule(
+  ({ newPassword }) => Boolean(newPassword),
+  "Please enter a new password"
+);
+
+const passwordConfirmed = createRule(
+  ({ newPassword, confirmNewPassword }) => confirmNewPassword === newPassword,
+  "New passwords don't match"
+);
+const passwordIsLong = createRule(
+  ({ newPassword }) => newPassword.length >= 8,
+  "New password should have at least 8 characters"
+);
+
+const passwordHasDigits = createRule(
+  ({ newPassword }) => /\d/.test(newPassword),
+  "New password should contain some digits"
+);
+
+const RULES = [
+  oldPasswordCorrect,
+  newPasswordNotEmpty,
+  newPasswordIsNotOldPassword,
+  passwordConfirmed,
+  passwordIsLong,
+  passwordHasDigits
+];
+
+function checkForm({ oldPassword, newPassword, confirmNewPassword }, rules) {
+  return rules.reduce(
+    (maybeError, rule) =>
+      maybeError || rule({ oldPassword, newPassword, confirmNewPassword }),
+    null
+  );
 }
 
 // -------------
