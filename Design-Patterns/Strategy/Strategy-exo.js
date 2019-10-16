@@ -40,13 +40,16 @@ import {
 } from "./Strategy-lib";
 
 class DrawingArea {
-  constructor(size = 4, color = MAGENTA) {
+  constructor(shape = "circle", size = 4, color = MAGENTA) {
+    this.shape = shape;
     this.size = size;
     this.color = color;
   }
 
   // shape = 'circle' | 'square'
-  setShape(shape) {}
+  setShape(shape) {
+    this.shape = shape;
+  }
 
   setSize(size) {
     this.size = size;
@@ -59,8 +62,19 @@ class DrawingArea {
   // Draw a circle at the given coordinate
   // using the current size and color
   draw(x, y) {
-    // if (circle) ?
-    drawCircle(x, y, this.size, this.color);
+    switch (this.shape) {
+      case "circle":
+        return drawCircle(x, y, this.size / 2, this.color);
+      case "square":
+        return drawSquare(
+          x - this.size / 2,
+          y - this.size / 2,
+          this.size,
+          this.color
+        );
+      default:
+        throw new Error("Unknown shape");
+    }
   }
 }
 
@@ -81,6 +95,13 @@ function init() {
   });
   [["Size4", 4], ["Size16", 16], ["Size64", 64]].forEach(([id, size]) => {
     bindSizeButton(id, size, drawingArea);
+  });
+
+  bindButton("Square", () => {
+    drawingArea.setShape("square");
+  });
+  bindButton("Circle", () => {
+    drawingArea.setShape("circle");
   });
 
   onClick((x, y) => {
