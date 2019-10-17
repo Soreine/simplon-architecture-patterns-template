@@ -28,12 +28,22 @@ Faites en sorte que cliquer sur le macaron ajoute 1 euro au GameState, et mette 
 Nous allons mettre en place les bases d'un système Observer pour observer le GameState. GameState jouera le rôle de Publisher et doit remplir l'interface suivante:
 
 ```ts
-interface GameStatePublisher {
+// Completer l'implémentation de GameState avec:
+
+class GameState {
+  constructor() {
+    this.subscribers = // ...
+  }
+
   // Ajoute un subscriber qui sera notifié dès que le GameState change
-  subsribe(subscriber);
+  subscribe(subscriber) {
+
+  }
 
   // Notifie tous les subscribers du nouvel étate de GameState
-  notifySubscribers();
+  notifySubscribers() {
+    // Appeler tous les subscriber.update(this)
+  }
 }
 ```
 
