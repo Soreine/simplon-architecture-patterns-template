@@ -35,7 +35,7 @@ class GameState {
     this.subscribers = // ...
   }
 
-  // Ajoute un subscriber qui sera notifié dès que le GameState change
+  // Ajoute un subscriber (plus tard, il sera notifié dès que le GameState change)
   subscribe(subscriber) {
 
   }

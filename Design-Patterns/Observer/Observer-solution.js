@@ -92,28 +92,53 @@ class UpgradeUI {
 // Votre code ci-dessous
 // ------------------------------------
 
+// Publisher
 class GameState {
   constructor() {
     this.money = 0;
+    this.subscribers = [];
   }
 
   moneyTransaction(transaction) {
     this.money = transaction(this.money);
+    this.notifySubscribers();
+  }
+
+  // Ajoute un subscriber (plus tard, il sera notifié dès que le GameState change)
+  subscribe(subscriber) {
+    this.subscribers.push(subscriber);
+  }
+
+  // Notifie tous les subscribers du nouvel étate de GameState
+  notifySubscribers() {
+    // Appeler tous les subscriber.update(this)
+    this.subscribers.forEach(subscriber => subscriber.update(this));
+  }
+}
+
+// Subscriber
+class MoneyController {
+  constructor(moneyDisplay) {
+    this.moneyDisplay = moneyDisplay;
+  }
+
+  update(gameState) {
+    this.moneyDisplay.displayAmount(gameState.money);
   }
 }
 
 // This is called when the page is loaded.
 function init() {
   const macaronButton = new MacaronButton();
-  const moneyDisplay = new MoneyDisplay();
 
   const gameState = new GameState();
+
+  const moneyController = new MoneyController(new MoneyDisplay());
+  gameState.subscribe(moneyController);
 
   macaronButton.onClick(() => {
     // Ajouter 1 euro
     gameState.moneyTransaction(amount => amount + 1);
-    // Mettre a jour l'afficheur
-    moneyDisplay.displayAmount(gameState.money);
   });
 }
 
