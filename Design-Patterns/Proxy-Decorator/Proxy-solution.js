@@ -17,6 +17,10 @@ class CountryDB {
     return fetch(this.countryCapitalsUrl).then(res => res.json());
   }
 
+  /**
+   * Given the name of a country that exists, returns a Promise<string>
+   * with the name of the country's capital. Otherwise returns Promise<null>
+   */
   async findCountryCapital(countryName) {
     const countryNamesJson = await this.fetchCountryNames();
     const countryCapitalsJson = await this.fetchCountryCapitals();
@@ -33,8 +37,11 @@ class CountryDB {
   }
 }
 
-const countryDB = new CountryDB(NAMES_URL, CAPITALS_URL);
-countryDB.findCountryCapital("Uruguay").then(capital => {
-  const text = JSON.stringify(capital, null, 2);
-  document.body.innerText = text;
-});
+const input = document.getElementById("country-name");
+const resultBox = document.getElementById("result");
+
+function triggerSearch(inputEvent) {
+  console.log("Triggered Search", inputEvent);
+}
+
+input.addEventListener("input", triggerSearch);
