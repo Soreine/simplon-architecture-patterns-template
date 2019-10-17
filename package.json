@@ -23,6 +23,7 @@
     "Proxy": "npm run parcel ./Design-Patterns/Proxy-Decorator/Proxy-exo.html",
     "Strategy": "npm run parcel ./Design-Patterns/Strategy/Strategy-exo.html",
     "CoR": "npm run parcel ./Design-Patterns/Chain-of-Responsibility/Chain-of-Responsibility-exo.html",
+    "fibo": "node ./Functional-Programming/fibo.js",
     "parcel": "./node_modules/.bin/parcel"
   }
 }
