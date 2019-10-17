@@ -60,25 +60,68 @@ Demandez vous où les appels à `notifySubscribers` seront fait. Réimplémenter
 
 ## 3.
 
-Créez une classe Upgrade qui, pour une amélioration, jouera la rôle de controlleur. Elle définira ses propriétés (id, price, moneyPerSecond) et gèrera son état (enabled, count).
+Créez une classe Upgrade qui, pour une amélioration, jouera la rôle de controlleur. Elle définira ses propriétés (id, price) et gèrera son état (purchasable, count).
 
-Implémenter une méthode `incrementCount()` et `setEnabled(boolean)` pour modifier chaque état.
+```js
+/**
+ * Gère l'affichage (prix) et l'etat (si l'upgrade est achetable, nombre d'upgrade) d'une upgrade.
+ */
+class Upgrade {
+  constructor(ui, price, moneyPerSecond) {
+    this.ui = ui;
+    this.price = price;
+    this.moneyPerSecond = moneyPerSecond;
 
-Implémenter une méthode générale `updateUI()` qui met à jour l'UI de cette upgrade.
+    // Initial state
+    this.purchasable = false;
+    this.count = 0;
 
-Faites quelques tests d'utilisation de cette classe
+    // Initialize UI
+    this.updateUI();
+  }
+
+  // Met à jour tout l'affichage de cette Upgrade en fonction de
+  // son état et ses propriétés
+  updateUI() {
+    // Afficher le prix
+    // Activer/desactiver le bouton si l'upgrade est achetable ou non
+    // Afficher le nombre d'upgrade achetées
+  }
+}
+```
+
+Pour la suite on utilisera ces valeurs pour les upgrades:
+
+```js
+const UPGRADES_CONFIG = [
+  { id: "clicker", price: 10, moneyPerSecond: 1 },
+  { id: "grandma", price: 100, moneyPerSecond: 10 },
+  { id: "bakery", price: 1000, moneyPerSecond: 100 },
+  { id: "factory", price: 10000, moneyPerSecond: 1000 }
+];
+```
+
+Initialisez un controlleur `Upgrade` pour chaque upgrade, et vérifier que leur prix s'affiche correctement.
 
 ## 4.
 
-Faites que la classe Upgrade implémente l'interface `GameStateSubscriber`. Quand la quantité d'argent change, les améliorations doivent s'activer ou se désactiver. Créez une instance d'Upgrade pour les 4 améliorations du jeu et souscrivez les aux update du GameState.
+Faites que la classe Upgrade implémente l'interface `GameStateSubscriber`. Quand la quantité d'argent change, les améliorations doivent être notifiées et activer/desactiver leur bouton.
 
-Note: Vous aurez peut-être un souci d'état initial (l'argent est à 0, et les upgrade sont cliquables). Comment pouvons nous régler ce problème dans le cadre d'un design Observer ?
+```js
+class Upgrade {
+  update(gameState) {
+    // ...
+  }
+}
+```
+
+Note: Vous aurez peut-être un souci d'état initial (l'argent est à 0, et les upgrade sont achetables). Comment pouvons nous régler ce problème dans le cadre d'un design Observer ?
 
 ## 5.
 
 Implémenter une méthode `Upgrade.onBuy(callback)` qui permet de réagir à l'achat d'une upgrade (upgrade activée et l'utilisateur a cliqué).
 
-Faire en sorte qu'acheter une upgrade déduise son prix de l'argent possédé, et increment le compte de cette upgrade. Pour l'instant, acheter une upgrade ne génère pas d'argent.
+Faire en sorte qu'acheter une upgrade déduise son prix de l'argent possédé, et incrémente le compte de cette upgrade. Pour l'instant, acheter une upgrade ne génère pas d'argent.
 
 ## 6.
 
@@ -90,6 +133,8 @@ Créez une classe MoneyGenerator:
 class MoneyGenerator {
   // `transaction` est une fonction pouvant être passée
   // à `gameState.moneyTransaction`
+  // `period` est l'intervalle de temps régulier auquel est généré
+  // l'argent
   constructor(gameState, transaction, period)
 
   // Commence à appliquer la `transaction` sur le
@@ -98,6 +143,6 @@ class MoneyGenerator {
 }
 ```
 
-À l'achat d'une upgrade, initialiser et démarrer un générateur d'argent ayant pour cible le GameState, avec une transaction du montant approprié, et une periode d'une seconde.
+À l'achat d'une upgrade, initialiser et démarrer un générateur d'argent, avec une transaction du montant approprié, et une periode d'une seconde.
 
 Remarque: On peut voir ici une forme de pattern Observer, où le publisher `MoneyGenerator` n'a qu'un seul subscriber (`gameState`).
