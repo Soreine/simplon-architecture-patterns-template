@@ -50,45 +50,60 @@ class CountryDBLogger {
   }
 }
 
-class CountryDBCache {
-  constructor(countryDB) {
-    this.countryDB = countryDB;
-    this.cache = new Cache();
-  }
+// class CountryDBCache {
+//   constructor(countryDB) {
+//     this.countryDB = countryDB;
+//     this.cache = new Cache();
+//   }
 
-  async findCountryCapital(countryName) {
-    if (this.cache.has(countryName)) {
-      return this.cache.get(countryName);
+//   async findCountryCapital(countryName) {
+//     if (this.cache.has(countryName)) {
+//       return this.cache.get(countryName);
+//     }
+
+//     const result = await this.countryDB.findCountryCapital(countryName);
+//     this.cache.save(countryName, result);
+//     return result;
+//   }
+// }
+
+// class Cache {
+//   constructor() {
+//     // key => value
+//     // countryName => capitalName
+//     // string => (string | null)
+//     // On utilise un objet {}
+//     this.object = {};
+//   }
+
+//   save(key, value) {
+//     this.object[key] = value;
+//   }
+
+//   get(key) {
+//     return this.object[key];
+//   }
+
+//   has(key) {
+//     // eslint-disable-next-line no-prototype-builtins
+//     return this.object.hasOwnProperty(key);
+//     // return Object.prototype.hasOwnProperty.call(this.object, key)
+//   }
+// }
+
+function memoize(object, methodName) {
+  const cache = {};
+  const originalMethod = object[methodName];
+
+  // eslint-disable-next-line no-param-reassign
+  object[methodName] = x => {
+    if (cache.hasOwnProperty(x)) {
+      return cache[x];
     }
 
-    const result = await this.countryDB.findCountryCapital(countryName);
-    this.cache.save(countryName, result);
-    return result;
-  }
-}
-
-class Cache {
-  constructor() {
-    // key => value
-    // countryName => capitalName
-    // string => (string | null)
-    // On utilise un objet {}
-    this.object = {};
-  }
-
-  save(key, value) {
-    this.object[key] = value;
-  }
-
-  get(key) {
-    return this.object[key];
-  }
-
-  has(key) {
-    // eslint-disable-next-line no-prototype-builtins
-    return this.object.hasOwnProperty(key);
-    // return Object.prototype.hasOwnProperty.call(this.object, key)
-  }
+    cache[x] = originalMethod.call(object, x);
+    return cache[x];
+  };
 }
 
 const input = document.getElementById("country-search");
@@ -96,11 +111,11 @@ const resultBox = document.getElementById("search-result");
 
 const countryDB = new CountryDB(NAMES_URL, CAPITALS_URL);
 const loggedCountryDB = new CountryDBLogger(countryDB);
-const cachedCountryDB = new CountryDBCache(loggedCountryDB);
+memoize(loggedCountryDB, "findCountryCapital");
 
 async function triggerSearch(inputEvent) {
   const countryName = inputEvent.target.value;
-  const capitalResult = await cachedCountryDB.findCountryCapital(countryName);
+  const capitalResult = await loggedCountryDB.findCountryCapital(countryName);
   displayResult(capitalResult);
 }
 
