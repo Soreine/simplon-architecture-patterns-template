@@ -127,6 +127,46 @@ class MoneyController {
   }
 }
 
+/**
+ * Gère l'affichage (prix) et l'etat (si l'upgrade est achetable, nombre d'upgrade) d'une upgrade.
+ */
+class Upgrade {
+  constructor(ui, price, moneyPerSecond) {
+    this.ui = ui;
+    this.price = price;
+    this.moneyPerSecond = moneyPerSecond;
+
+    // Initial state
+    this.purchasable = false;
+    this.count = 0;
+
+    // Initialize UI
+    this.updateUI();
+  }
+
+  // Met à jour tout l'affichage de cette Upgrade en fonction de
+  // son état et ses propriétés
+  updateUI() {
+    // Afficher le prix
+    this.ui.displayPrice(this.price);
+    // Activer/desactiver le bouton si l'upgrade est achetable ou non
+    if (this.purchasable) {
+      this.ui.enable();
+    } else {
+      this.ui.disable();
+    }
+    // Afficher le nombre d'upgrade achetées
+    this.ui.displayCount(this.count);
+  }
+}
+
+const UPGRADES_CONFIG = [
+  { id: "clicker", price: 10, moneyPerSecond: 1 },
+  { id: "grandma", price: 100, moneyPerSecond: 10 },
+  { id: "bakery", price: 1000, moneyPerSecond: 100 },
+  { id: "factory", price: 10000, moneyPerSecond: 1000 }
+];
+
 // This is called when the page is loaded.
 function init() {
   const macaronButton = new MacaronButton();
@@ -140,11 +180,11 @@ function init() {
     // Ajouter 1 euro
     gameState.moneyTransaction(amount => amount + 1);
   });
+
+  const upgrades = UPGRADES_CONFIG.map(
+    ({ id, price, moneyPerSecond }) =>
+      new Upgrade(new UpgradeUI(id), price, moneyPerSecond)
+  );
 }
-
-// const mamieTransaction = amount => amount + 10;
-// const buyMamie = amount => amount - 100;
-
-// gameState.moneyTransaction(mamieTransaction);
 
 window.onload = init;
