@@ -92,10 +92,17 @@ class UpgradeUI {
 // Votre code ci-dessous
 // ------------------------------------
 
+const UPGRADES_CONFIG = [
+  { id: "clicker", price: 10, moneyPerSecond: 1 },
+  { id: "grandma", price: 100, moneyPerSecond: 10 },
+  { id: "bakery", price: 1000, moneyPerSecond: 100 },
+  { id: "factory", price: 10000, moneyPerSecond: 1000 }
+];
+
 // Publisher
 class GameState {
   constructor() {
-    this.money = 0;
+    this.money = 1000;
     this.subscribers = [];
   }
 
@@ -107,6 +114,7 @@ class GameState {
   // Ajoute un subscriber (plus tard, il sera notifié dès que le GameState change)
   subscribe(subscriber) {
     this.subscribers.push(subscriber);
+    subscriber.update(this);
   }
 
   // Notifie tous les subscribers du nouvel étate de GameState
@@ -158,14 +166,12 @@ class Upgrade {
     // Afficher le nombre d'upgrade achetées
     this.ui.displayCount(this.count);
   }
-}
 
-const UPGRADES_CONFIG = [
-  { id: "clicker", price: 10, moneyPerSecond: 1 },
-  { id: "grandma", price: 100, moneyPerSecond: 10 },
-  { id: "bakery", price: 1000, moneyPerSecond: 100 },
-  { id: "factory", price: 10000, moneyPerSecond: 1000 }
-];
+  update(gameState) {
+    this.purchasable = gameState.money >= this.price;
+    this.updateUI();
+  }
+}
 
 // This is called when the page is loaded.
 function init() {
@@ -185,6 +191,8 @@ function init() {
     ({ id, price, moneyPerSecond }) =>
       new Upgrade(new UpgradeUI(id), price, moneyPerSecond)
   );
+  // Subscribe upgrades
+  upgrades.forEach(upgrade => gameState.subscribe(upgrade));
 }
 
 window.onload = init;
