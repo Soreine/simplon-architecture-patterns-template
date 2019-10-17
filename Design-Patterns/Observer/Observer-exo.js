@@ -88,20 +88,13 @@ class UpgradeUI {
   }
 }
 
-const UPGRADES_CONFIG = [
-  { id: "clicker", price: 10, moneyPerSecond: 1 },
-  { id: "grandma", price: 100, moneyPerSecond: 10 },
-  { id: "bakery", price: 1000, moneyPerSecond: 100 },
-  { id: "factory", price: 10000, moneyPerSecond: 1000 }
-];
-
 // This is called when the page is loaded.
 function init() {
   // TODO le code qui suit est un exemple d'usage
   const macaronButton = new MacaronButton();
   const moneyDisplay = new MoneyDisplay();
 
-  const clickerUI = new UpgradeUI("clicker");
+  // ...
 }
 
 window.onload = init;

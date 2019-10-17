@@ -20,6 +20,7 @@
     "prettier": "^1.18.2"
   },
   "scripts": {
+    "Observer": "npm run parcel ./Design-Patterns/Observer/Observer.html",
     "Proxy": "npm run parcel ./Design-Patterns/Proxy-Decorator/Proxy-exo.html",
     "Strategy": "npm run parcel ./Design-Patterns/Strategy/Strategy-exo.html",
     "CoR": "npm run parcel ./Design-Patterns/Chain-of-Responsibility/Chain-of-Responsibility-exo.html",

@@ -12,8 +12,12 @@ Créez une class GameState, qui gère l'état des finances du joueur. Pour avoir
 
 ```js
 class GameState {
+  money: number;
+
   // Modifie la quantité d'argent an appliquant une fonction `transaction` qui prend en entrée le montant actuel, et renvoie le nouveau montant.
   moneyTransaction(transaction)
+
+  // ex: transaction = (amount) => amount + 5
 }
 ```
 
