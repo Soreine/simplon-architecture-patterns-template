@@ -38,7 +38,16 @@ class CountryDB {
 }
 
 class CountryDBLogger {
-  // ... TODO
+  constructor(countryDB) {
+    this.countryDB = countryDB;
+  }
+
+  findCountryCapital(countryName) {
+    // 1. Logger l'appel
+    console.log(`Called findCountryCapital(${countryName})`);
+    // 2. transmettre l'appel de findCountryCapital
+    return this.countryDB.findCountryCapital(countryName);
+  }
 }
 
 const input = document.getElementById("country-search");
