@@ -171,6 +171,10 @@ class Upgrade {
     this.purchasable = gameState.money >= this.price;
     this.updateUI();
   }
+
+  onBuy(callback) {
+    // this.ui.onClick;
+  }
 }
 
 // This is called when the page is loaded.
@@ -193,6 +197,13 @@ function init() {
   );
   // Subscribe upgrades
   upgrades.forEach(upgrade => gameState.subscribe(upgrade));
+
+  // React on buy
+  upgrades.forEach(upgrade =>
+    upgrade.onBuy(() => {
+      // Déduire l'argent de l'achat
+    })
+  );
 }
 
 window.onload = init;
