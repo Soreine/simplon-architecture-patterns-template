@@ -37,11 +37,28 @@ class CountryDB {
   }
 }
 
-const input = document.getElementById("country-name");
-const resultBox = document.getElementById("result");
+class CountryDBLogger {
+  // ... TODO
+}
 
-function triggerSearch(inputEvent) {
-  console.log("Triggered Search", inputEvent);
+const input = document.getElementById("country-search");
+const resultBox = document.getElementById("search-result");
+
+const countryDB = new CountryDB(NAMES_URL, CAPITALS_URL);
+const loggedCountryDB = new CountryDBLogger(countryDB);
+
+async function triggerSearch(inputEvent) {
+  const countryName = inputEvent.target.value;
+  const capitalResult = await loggedCountryDB.findCountryCapital(countryName);
+  displayResult(capitalResult);
+}
+
+function displayResult(maybeCapital) {
+  if (maybeCapital == null) {
+    resultBox.innerText = "No country found";
+  } else {
+    resultBox.innerText = `The capital is: ${maybeCapital}`;
+  }
 }
 
 input.addEventListener("input", triggerSearch);
