@@ -99,6 +99,8 @@ const UPGRADES_CONFIG = [
   { id: "factory", price: 10000, moneyPerSecond: 1000 }
 ];
 
+const ONE_SECOND = 1000; // ms
+
 // Publisher
 class GameState {
   constructor() {
@@ -173,7 +175,33 @@ class Upgrade {
   }
 
   onBuy(callback) {
-    // this.ui.onClick;
+    this.ui.onClick(() => {
+      if (this.purchasable) {
+        this.count += 1;
+        this.updateUI();
+        callback();
+      }
+    });
+  }
+}
+
+class MoneyGenerator {
+  // `transaction` est une fonction pouvant être passée
+  // à `gameState.moneyTransaction`
+  // `period` est l'intervalle de temps régulier auquel est généré
+  // l'argent
+  constructor(gameState, transaction, period) {
+    this.gameState = gameState;
+    this.transaction = transaction;
+    this.period = period;
+  }
+
+  // Commence à appliquer la `transaction` sur le
+  // `gameState` à intervalle régulier de longueur `period`
+  start() {
+    setInterval(() => {
+      this.gameState.moneyTransaction(this.transaction);
+    }, this.period);
   }
 }
 
@@ -202,6 +230,13 @@ function init() {
   upgrades.forEach(upgrade =>
     upgrade.onBuy(() => {
       // Déduire l'argent de l'achat
+      gameState.moneyTransaction(amount => amount - upgrade.price);
+      const generator = new MoneyGenerator(
+        gameState,
+        amount => amount + upgrade.moneyPerSecond,
+        ONE_SECOND
+      );
+      generator.start();
     })
   );
 }
